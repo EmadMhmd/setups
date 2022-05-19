@@ -1,0 +1,26 @@
+{
+    "env": {
+        "node": true,
+        "commonjs": true,
+        "es2021": true
+    },
+    "root": true,
+    "parser": "@typescript-eslint/parser",
+    "plugins": [
+        "@typescript-eslint"
+    ],
+    "extends": [
+        "airbnb-base",
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended"
+    ],
+    "parserOptions": {
+        "ecmaVersion": "latest" 
+    },
+    "rules": {
+        "no-console":"off",
+        "import/no-unresolved":"off",
+        "import/extensions":"off",
+        "class-methods-use-this":"off"
+    }
+}
