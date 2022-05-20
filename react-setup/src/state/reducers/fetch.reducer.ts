@@ -1,19 +1,15 @@
-import { ADDED, DELETED, UPDATED } from '../actions/action.d';
+import { FETCHING_FAILED, FETCHING_TIME } from '../actions/action.d';
 
 const initState = {
-  added: false,
-  deleted: false,
-  updated: false,
+  fetching: false,
 };
 
 const fetchReducer = (state = initState, action) => {
   switch (action.type) {
-    case ADDED:
-      return { ...state, ADDED: true };
-    case DELETED:
-      return { ...state, deleted: true };
-    case UPDATED:
-      return { ...state, updated: true };
+    case FETCHING_TIME:
+      return { ...state, fetching: true };
+    case FETCHING_FAILED:
+      return { ...state, fetching: false };
     default:
       return state;
   }

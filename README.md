@@ -1,6 +1,19 @@
-# Corelia Cyber Scurity Accelerator (COCA) Project
+# Setups
 
-Internal tool used by a Corelia cyber security team to reduce spended time in a data gathering stage
+Initial setups for node and react
+
+- Readme content
+  - [Development section](#development)
+    - [Prerequirements](#prerequirements)
+    - [Configuration](#configuration)
+    - [Run instructions](#run-instructions)
+    - [Helpful tools for development](#helpful-tools-for-development)
+  - [Docker instructions section](#docker-instructions)
+    - [For developement node server](#for-developement-node-server)
+    - [For production node server](#for-production-node-server)
+    - [For developement react client](#for-developement-react-client)
+    - [For production react client](#for-production-react-client)
+  - [Architecure section](#architecure)
 
 ## Development
 
@@ -60,7 +73,7 @@ PASS_IN=${pass}
 
 ### Run instructions
 
-- Install server dependancies
+- Install node server dependancies
 
 ```sh
 cd server
@@ -80,13 +93,13 @@ source ../dev.env
 
 ```
 
-- Run the server
+- Run node server
 
 ```sh
 npm start
 ```
 
-- Install client dependancies
+- Install react client dependancies
 
 ```sh
 cd client
@@ -106,21 +119,21 @@ source ../dev.env
 
 ```
 
-- Run the client
+- Run react client
 
 ```sh
 npm start
 ```
 
-### Helpful tools
+### Helpful tools for development
 
-- Visual studio code (VS)
-- Markdownlint VS extension
-- ESLint VS extension
+- `Visual studio code` (VS)
+- `Markdownlint` VS extension
+- `ESLint` VS extension
 
 ## Docker instructions
 
-### For developement server
+### For developement node server
 
 - Copy example.dev.env to dev.env and adapt you vaiables (See configuraion section)
 
@@ -144,7 +157,7 @@ npm install
 npm start
 ```
 
-### For production server
+### For production node server
 
 - Copy example.env to .env and adapt you vaiables (See configuraion section)
 
@@ -168,7 +181,7 @@ make publish
 docker-compose up -d
 ```
 
-### For developement client
+### For developement react client
 
 - Copy example.dev.env to dev.env and adapt you vaiables (See configuraion section)
 
@@ -192,7 +205,7 @@ npm install
 npm start
 ```
 
-### For production client
+### For production react client
 
 - Copy example.env to .env and adapt you vaiables (See configuraion section)
 
@@ -215,3 +228,9 @@ make publish
 ```sh
 docker-compose up -d
 ```
+
+## Architecure
+
+- [Database-architecure](database_arch.drawio)
+- [General-architecure](general_arch.drawio)
+- [Detailsed-architecure](detailsed_arch.drawio)

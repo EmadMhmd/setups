@@ -1,4 +1,4 @@
-import { LISTING_DATA_FETCHING } from '../actions/action.d';
+import { LISTING_DATA_FETCHING } from '../actions/action';
 
 const initState = {
   company: [],

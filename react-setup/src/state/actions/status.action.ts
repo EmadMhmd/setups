@@ -1,12 +1,17 @@
+/* eslint-disable class-methods-use-this */
 import { ERROR_STATUS_ADDED, SUCCESS_STATUS_ADDED, STATUS_CLEARED } from './action.d';
 
-export const addErrorStatus = (e: Error) => {
-  const { response: { data: { error } } } = e;
-  return { type: ERROR_STATUS_ADDED, payload: error };
-};
+class Status {
+  addErrorStatus = (e: Error) => {
+    const { response: { data: { error } } } = e;
+    return { type: ERROR_STATUS_ADDED, payload: error };
+  };
 
-export const addSuccessStatus = (message : string) => ({
-  type: SUCCESS_STATUS_ADDED, payload: message,
-});
+  addSuccessStatus = (message : string) => ({
+    type: SUCCESS_STATUS_ADDED, payload: message,
+  });
 
-export const clearStatus = () => ({ type: STATUS_CLEARED });
+  clearStatus = () => ({ type: STATUS_CLEARED });
+}
+
+export default new Status();

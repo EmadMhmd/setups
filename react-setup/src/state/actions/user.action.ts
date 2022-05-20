@@ -1,93 +1,22 @@
-import { ADDED } from './action.d';
-import { addUser } from '../../api/user.api';
-import { addSuccessStatus, addErrorStatus, clearStatus } from './status.action';
-import { fetchingFailed, fetchingTime } from './fetch.action';
-import IUser from '../../interfaces/user';
+/* eslint-disable class-methods-use-this */
+import { Dispatch } from 'redux';
+import { userApi } from '../../api';
+import { statusAction, fetchAction } from '.';
+import { IUser } from '../../interfaces/domain';
 
-// eslint-disable-next-line import/prefer-default-export
-export const addUserAction = (user: IUser) => async (dispatch) => {
-  try {
-    dispatch(clearStatus());
-    dispatch(fetchingTime());
-    const { data: { msg } } = await addUser(user);
-    dispatch({ type: ADDED });
-    dispatch(addSuccessStatus(msg));
-    dispatch(fetchingFailed());
-  } catch (e) {
-    dispatch(fetchingFailed());
-    dispatch(addErrorStatus(e));
-  }
-};
+class User {
+  addUserAction = (user: IUser) => async (dispatch: Dispatch) => {
+    try {
+      dispatch(statusAction.clearStatus());
+      dispatch(fetchAction.fetchingTime());
+      const { data: { msg } } = await userApi.addUser(user);
+      dispatch(statusAction.addSuccessStatus(msg));
+      dispatch(fetchAction.fetchingFailed());
+    } catch (e) {
+      dispatch(fetchAction.fetchingFailed());
+      dispatch(statusAction.addErrorStatus(e));
+    }
+  };
+}
 
-// export const listingDataAction = (name)=>{
-//     return async dispatch =>{
-//         try{
-//             dispatch(clearError())
-//             dispatch(clearMessage())
-//             dispatch(fetchingTime())
-//             const {data : {msg , company}} = await listingDataApi(name);
-//             console.log("company : " ,msg, company)
-//             dispatch({type : LISTING_DATA_FETCHING , payload:company });
-//             dispatch(addMessage(msg))
-//             dispatch(fetchingFailed())
-//         }catch(e){
-//             console.log('err from listing data action')
-//             dispatch(fetchingFailed())
-//             dispatch(addError(e))
-//         }
-//     }
-// }
-
-// export const gatheringDataAction = (data)=>{
-//     return async dispatch =>{
-//         try{
-
-//             dispatch(clearError())
-//             dispatch(clearMessage())
-//             dispatch(fetchingTime())
-//             const {data : {msg}} = await gatheringDataApi(data);
-//             //dispatch({type : DATA_GATHERING });
-//             dispatch(addMessage(msg))
-//             dispatch(fetchingFailed())
-//         }catch(e){
-//             dispatch(fetchingFailed())
-//             dispatch(addError(e))
-//         }
-//     }
-// }
-
-// export const addUser = (data)=>{
-//     return async dispatch =>{
-//         try{
-
-//             dispatch(clearError())
-//             dispatch(clearMessage())
-//             dispatch(fetchingTime())
-//             const {data : {msg}} = await gatheringDataApi(data);
-//             //dispatch({type : DATA_GATHERING });
-//             dispatch(addMessage(msg))
-//             dispatch(fetchingFailed())
-//         }catch(e){
-//             dispatch(fetchingFailed())
-//             dispatch(addError(e))
-//         }
-//     }
-// }
-
-// export const creatingReportAction = (data)=>{
-//     return async dispatch =>{
-//         try{
-
-//             dispatch(clearError())
-//             dispatch(clearMessage())
-//             dispatch(fetchingTime())
-//             const {data : {msg}} = await createReportApi(data);
-//             //dispatch({type :  });
-//             dispatch(addMessage(msg))
-//             dispatch(fetchingFailed())
-//         }catch(e){
-//             dispatch(fetchingFailed())
-//             dispatch(addError(e))
-//         }
-//     }
-// }
+export default new User();

@@ -1,5 +1,9 @@
+/* eslint-disable class-methods-use-this */
 import { FETCHING_TIME, FETCHING_FAILED } from './action.d';
 
-export const fetchingTime = () => ({ type: FETCHING_TIME });
+class Fetch {
+  fetchingTime = () => ({ type: FETCHING_TIME });
 
-export const fetchingFailed = () => ({ type: FETCHING_FAILED });
+  fetchingFailed = () => ({ type: FETCHING_FAILED });
+}
+export default new Fetch();

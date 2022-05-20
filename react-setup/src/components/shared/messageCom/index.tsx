@@ -1,8 +1,7 @@
 import React from 'react';
 import { UncontrolledAlert } from 'reactstrap';
 import { connect } from 'react-redux';
-import IStore from '../../../interfaces/store';
-import IStatus from '../../../interfaces/status';
+import IStore, { IStatus } from '../../../interfaces/reducers';
 
 interface statusProp {
   status : IStatus

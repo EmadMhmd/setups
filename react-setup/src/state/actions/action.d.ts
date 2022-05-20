@@ -5,10 +5,6 @@ export const ERROR_STATUS_ADDED = 'ERROR_STATUS_ADDED';
 export const SUCCESS_STATUS_ADDED = 'SUCCESS_STATUS_ADDED';
 export const STATUS_CLEARED = 'STATUS_CLEARED';
 
-export const ADDED = 'ADDED';
-export const DELETED = 'DELETED';
-export const UPDATED = 'UPDATED';
-
 export const LISTING_DATA_FETCHING = 'LISTING_DATA_FETCHING';
 export const DATA_GATHERING = 'DATA_GATHERING';
 
