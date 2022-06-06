@@ -1,19 +1,21 @@
 # Setups
 
-Initial setups for node and react
+Initial setups for node and react (Under Development)
 
-- Readme content
-  - [Development section](#development)
-    - [Prerequirements](#prerequirements)
-    - [Configuration](#configuration)
-    - [Run instructions](#run-instructions)
-    - [Helpful tools for development](#helpful-tools-for-development)
-  - [Docker instructions section](#docker-instructions)
-    - [For developement node server](#for-developement-node-server)
-    - [For production node server](#for-production-node-server)
-    - [For developement react client](#for-developement-react-client)
-    - [For production react client](#for-production-react-client)
-  - [Architecure section](#architecure)
+## Table of content
+
+- [Development section](#development)
+  - [Prerequirements](#prerequirements)
+  - [Configuration](#configuration)
+  - [Run instructions](#run-instructions)
+  - [Helpful tools for development](#helpful-tools-for-development)
+- [Docker instructions section](#docker-instructions)
+  - [For developement node server](#for-developement-node-server)
+  - [For production node server](#for-production-node-server)
+  - [For developement react client](#for-developement-react-client)
+  - [For production react client](#for-production-react-client)
+- [Architecure section](#architecure)
+- [TODOs](#todos)
 
 ## Development
 
@@ -231,6 +233,10 @@ docker-compose up -d
 
 ## Architecure
 
-- [Database-architecure](database_arch.drawio)
-- [General-architecure](general_arch.drawio)
-- [Detailsed-architecure](detailsed_arch.drawio)
+- [Database-architecure](./docs/database_arch.drawio)
+- [General-architecure](./docs/general_arch.drawio)
+- [Detailsed-architecure](./docs/detailsed_arch.drawio)
+
+## TODOs
+
+- [TODOs](./docs/TODOs.md)
