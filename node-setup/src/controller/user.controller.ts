@@ -9,9 +9,9 @@ class UserContoller {
       res.send({
         msg: 'User added successfully',
       });
-    } catch (e) {
+    } catch (e: unknown) {
       res.status(401).send({
-        error: 'Error Throwed From  User add service',
+        error: (e instanceof Error && e.message) || 'Fail to sigup the user, Please try again !!',
       });
     }
   };
@@ -23,9 +23,9 @@ class UserContoller {
       res.send({
         msg: 'User got successfully', user,
       });
-    } catch (e) {
+    } catch (e: unknown) {
       res.status(401).send({
-        error: 'Error Throwed From  get user service',
+        error: (e instanceof Error && e.message) || 'Fail to get user data, Please try again !!',
       });
     }
   };

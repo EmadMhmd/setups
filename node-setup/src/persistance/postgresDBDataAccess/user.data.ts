@@ -6,9 +6,8 @@ class UserData {
     try {
       const newUser = User.create(user);
       return newUser;
-    } catch (e) {
-      Object(e).message = 'Fail to save the user !!';
-      throw e;
+    } catch {
+      throw new Error('Fail to save the user, Please try again !!');
     }
   };
 
@@ -16,9 +15,8 @@ class UserData {
     try {
       const user = await User.findOne({ where: { id } });
       return user;
-    } catch (e) {
-      Object(e).message = 'Fail to get the user !!';
-      throw e;
+    } catch {
+      throw new Error('Fail to get the user, Please try again !!');
     }
   };
 }

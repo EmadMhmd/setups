@@ -7,8 +7,8 @@ class UserService {
     try {
       const newUser = await userData.saveUser(user);
       return newUser;
-    } catch (e) {
-      throw new Error('Error throwed from strMatching service');
+    } catch {
+      throw new Error('Fail to signup the user, Please try again !!');
     }
   };
 
@@ -16,8 +16,8 @@ class UserService {
     try {
       const user = await userData.getUserById(id);
       return user;
-    } catch (e) {
-      throw new Error('Error throwed from strMatching service');
+    } catch {
+      throw new Error('Fail to get the user Data');
     }
   };
 }
