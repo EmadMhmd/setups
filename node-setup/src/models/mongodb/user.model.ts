@@ -17,5 +17,5 @@ export class User extends Typegoose {
     updatedAt?: Date;
 }
 
-const userModel = new User().getModelForClass(User);
-export default userModel;
+const UserModel = new User().getModelForClass(User);
+export default UserModel;
