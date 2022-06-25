@@ -1,8 +1,9 @@
-import { User } from '../models/mongodb/user.model';
-import userData from '../persistance/postgresDBDataAccess/user.data';
+import { IUser } from '../interface';
+import { userData } from '../persistance/postgresDBDataAccess';
+// import { userData } from '../persistance/mongoDBDataAccess';
 
-class UserServices {
-  saveUser = async (user : User) => {
+class UserService {
+  saveUser = async (user : IUser) => {
     try {
       const newUser = await userData.saveUser(user);
       return newUser;
@@ -21,4 +22,4 @@ class UserServices {
   };
 }
 
-export default new UserServices();
+export default new UserService();
