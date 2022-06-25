@@ -8,4 +8,6 @@ db.sync({ force: false })
     console.log('Tables Created');
   });
 
-export default User;
+export {
+  User,
+};
