@@ -5,32 +5,19 @@ const {
   MONGODB_PASSWORD,
   MONGODB_DATABASE,
   ENV_TYPE,
+  MONGODB_HOST,
+  MONGODB_PORT,
 } = process.env;
-
-let {
-  DB_HOST,
-  DB_PORT,
-} = process.env;
-
-// if server is running without docker
-if (!DB_PORT) {
-  DB_PORT = String(27017);
-}
-
-// if server is running without docker
-if (!DB_HOST) {
-  DB_HOST = 'localhost';
-}
 
 let url = '';
 
 if (ENV_TYPE === 'dev') {
-  url = `mongodb://${DB_HOST}/${MONGODB_DATABASE}`;
+  url = `mongodb://${MONGODB_HOST}/${MONGODB_DATABASE}`;
 } else {
-  url = `mongodb://${MONGODB_USER}:${MONGODB_PASSWORD}@${DB_HOST}:${DB_PORT}/${MONGODB_DATABASE}?authSource=admin`;
+  url = `mongodb://${MONGODB_USER}:${MONGODB_PASSWORD}@${MONGODB_HOST}:${MONGODB_PORT}/${MONGODB_DATABASE}?authSource=admin`;
 }
 
-const connectDb = () => {
+const connectToMongo = () => {
   mongoose.connect(url);
   mongoose.connection.on('connected', () => {
     console.log('Connected Successfully To Database ');
@@ -40,4 +27,4 @@ const connectDb = () => {
   });
 };
 
-export default connectDb;
+export default connectToMongo;
