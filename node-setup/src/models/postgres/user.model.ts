@@ -1,11 +1,18 @@
 import { DataTypes, Sequelize } from 'sequelize';
-// dbConnect.sync({ force: false }).then(() => console.log('table created'));
+import { v4 as uuidv4 } from 'uuid';
 
 const user = (db: Sequelize) => db.define('User', {
+  // id: {
+  //   type: DataTypes.INTEGER,
+  //   autoIncrement: true,
+  //   allowNull: false,
+  // },
   id: {
-    type: DataTypes.INTEGER,
-    autoIncrement: true,
+    type: DataTypes.UUID,
+    defaultValue: () => uuidv4(),
     primaryKey: true,
+    unique: true,
+    allowNull: false,
   },
   name: {
     type: DataTypes.STRING,
@@ -16,6 +23,9 @@ const user = (db: Sequelize) => db.define('User', {
     allowNull: false,
   },
   mobile: {
+    type: DataTypes.STRING,
+  },
+  password: {
     type: DataTypes.STRING,
   },
 }, {

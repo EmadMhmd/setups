@@ -10,6 +10,9 @@ export class User extends Typegoose {
   @prop({ required: false })
     mobile?: string;
 
+  @prop({ required: false })
+    password?: string;
+
   @prop({ required: true, default: Date.now() })
     createdAt?: Date;
 
