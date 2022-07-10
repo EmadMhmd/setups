@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { userService } from '../services';
 
-class UserContoller {
+class UserController {
   saveUser = async (req: Request, res: Response) => {
     const { body } = req;
     try {
@@ -11,7 +11,7 @@ class UserContoller {
       });
     } catch (e: unknown) {
       res.status(401).send({
-        error: (e instanceof Error && e.message) || 'Fail to sigup the user, Please try again !!',
+        error: (e instanceof Error && e.message) || 'Fail to signup the user, Please try again !!',
       });
     }
   };
@@ -31,4 +31,4 @@ class UserContoller {
   };
 }
 
-export default new UserContoller();
+export default new UserController();
