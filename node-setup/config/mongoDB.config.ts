@@ -1,17 +1,19 @@
 import mongoose from 'mongoose';
 
+import Env from './env.config';
+
 const {
   MONGODB_USER,
   MONGODB_PASSWORD,
   MONGODB_DATABASE,
-  ENV_TYPE,
+  SERVER_ENV,
   MONGODB_HOST,
   MONGODB_PORT,
-} = process.env;
+} = Env;
 
 let url = '';
 
-if (ENV_TYPE === 'dev') {
+if (SERVER_ENV === 'dev') {
   url = `mongodb://${MONGODB_HOST}/${MONGODB_DATABASE}`;
 } else {
   url = `mongodb://${MONGODB_USER}:${MONGODB_PASSWORD}@${MONGODB_HOST}:${MONGODB_PORT}/${MONGODB_DATABASE}?authSource=admin`;
