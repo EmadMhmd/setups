@@ -1,5 +1,8 @@
-import userRoute from './user.route';
+import { Router } from 'express';
+import userRoute from './api/user.route';
 
-export {
-  userRoute,
-};
+const routes = Router();
+
+routes.use('/user', userRoute);
+
+export default routes;
