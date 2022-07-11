@@ -14,10 +14,10 @@ export const db = new Sequelize(`postgres://${POSTGERS_USER}:${POSTGERS_PASSWORD
 const connectToPostgres = async () => {
   try {
     await db.authenticate();
-    console.log('Connect to postgres db has been established successfully.');
+    console.log('Connected successfully to PostgresDB');
   } catch (error) {
     // db.close();
-    console.error('Unable to connect to the postgres db:', error);
+    console.error('Fail to connect to PostgresDB:', error);
   }
 };
 

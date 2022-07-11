@@ -22,10 +22,10 @@ if (SERVER_ENV === 'dev') {
 const connectToMongo = () => {
   mongoose.connect(url);
   mongoose.connection.on('connected', () => {
-    console.log('Connected Successfully To Database ');
+    console.log('Connected successfully to MongoDB ');
   });
   mongoose.connection.on('error', (err) => {
-    console.error(`Failed To Database : ${err}`);
+    console.error(`Fail to connect to MongoDB : ${err}`);
   });
 };
 
