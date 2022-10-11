@@ -1,32 +1,71 @@
-import { Request, Response } from 'express';
-import { userService } from '../services';
+import { NextFunction, Request, Response } from 'express';
+import { Get, Route } from 'tsoa';
+import { hashPassword, isPasswordValid } from '../util/hashing';
+import { signUser } from '../util/auth.util';
+import { User } from '../services';
+import { IUser } from '../services/interfaces';
+import { DataAccess } from '../persistance';
+import { UserType } from '../types';
 
+const { UserDataAccess } = DataAccess;
+
+@Route('user')
 class UserController {
-  saveUser = async (req: Request, res: Response) => {
-    const { body } = req;
+  private user: IUser;
+
+  constructor() {
+    const userDataAccess = new UserDataAccess();
+    const user = new User(userDataAccess);
+    this.user = user;
+  }
+
+  @Get('/{id}')
+  public async getById(id: string): Promise<any> {
+    const user = await this.user.getById(id);
+    return user;
+  }
+
+  create = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      await userService.saveUser(body);
+      const { body } = req;
+
+      const user = await this.user.create({ ...body, password: hashPassword(body.password) });
+
       res.send({
-        msg: 'User added successfully',
+        msg: 'User added successfully', user,
       });
-    } catch (e: unknown) {
-      res.status(401).send({
-        error: (e instanceof Error && e.message) || 'Fail to signup the user, Please try again !!',
-      });
+    } catch (e) {
+      next(e);
     }
   };
 
-  getUserById = async (req: Request, res: Response) => {
-    const { id } = req.params;
+  public async get(req: Request, res: Response, next: NextFunction) {
     try {
-      const user = await userService.getUserById(id);
+      const { id } = req.user.user;
+      const user = await this.user.getById(id);
       res.send({
         msg: 'User got successfully', user,
       });
-    } catch (e: unknown) {
-      res.status(401).send({
-        error: (e instanceof Error && e.message) || 'Fail to get user data, Please try again !!',
-      });
+    } catch (e) {
+      next(e);
+    }
+  }
+
+  login = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { body: { email, password } } = req;
+      const user = await this.user.getByEmail(email);
+      if (user && isPasswordValid(user.password, password)) {
+        const token = signUser(user);
+        res.send({
+          msg: 'Signin successfully',
+          token,
+        });
+      } else {
+        throw new Error('Email and password not match, Please try again !!');
+      }
+    } catch (e) {
+      next(e);
     }
   };
 }
