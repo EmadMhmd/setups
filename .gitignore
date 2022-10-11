@@ -2,3 +2,4 @@
 dev.env
 links.txt
 node_modules
+.vscode
