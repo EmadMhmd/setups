@@ -1,8 +1,8 @@
-interface User {
-    id: number,
+type User = {
+    id?: number,
     name: string,
     email: string,
-    mobile: string,
+    mobile?: string,
     password: string,
 }
 export default User;
