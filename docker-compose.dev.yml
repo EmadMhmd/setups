@@ -16,9 +16,8 @@ services:
   server:
     depends_on:
       - mongodb
-    image : node:16.13.1
-    volumes:
-      - ./server:/app
+    image: node:16.13.1
+    restart: unless-stopped
     env_file: ./dev.env
     ports:
       - $NODE_LOCAL_PORT:$NODE_DOCKER_PORT
@@ -28,19 +27,28 @@ services:
       - DB_PASSWORD=$MONGODB_PASSWORD
       - DB_NAME=$MONGODB_DATABASE
       - DB_PORT=$MONGODB_DOCKER_PORT
+    volumes:
+      - ./server:/app
+      - ./node_modules:/app/node_modules
+    command: bash -c "yarn && yarn start"
+    working_dir: /app
     stdin_open: true
     tty: true
 
   client:
     image: node:16.13.1 # or the latest stable version
+    restart: unless-stopped
+    env_file:
+      - dev.env
     ports:
       - ${REACT_LOCAL_PORT:-3000}:3000
     volumes:
       - ./client:/app
+      - ./node_modules:/app/node_modules
+    command: bash -c "yarn && yarn build && yarn preview"
+    working_dir: /app
     stdin_open: true
     tty: true
-    env_file:
-      - dev.env
 
 volumes:
   db:
