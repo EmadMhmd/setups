@@ -4,29 +4,32 @@ Initial setups for node and react (Under Development)
 
 ## Table of content
 
-- [Development section](#development)
-  - [Prerequirements](#prerequirements)
-  - [Configuration](#configuration)
-  - [Run instructions](#run-instructions)
-  - [Helpful tools for development](#helpful-tools-for-development)
-- [Docker instructions section](#docker-instructions)
-  - [For developement node server](#for-developement-node-server)
-  - [For production node server](#for-production-node-server)
-  - [For developement react client](#for-developement-react-client)
-  - [For production react client](#for-production-react-client)
-- [Architecure section](#architecure)
-- [TODOs](#todos)
+- [Setups](#setups)
+  - [Table of content](#table-of-content)
+  - [Development](#development)
+    - [Prerequisites](#prerequisites)
+    - [Configuration](#configuration)
+    - [Run instructions](#run-instructions)
+    - [Helpful tools for development](#helpful-tools-for-development)
+  - [Docker instructions](#docker-instructions)
+    - [For development](#for-development)
+    - [For production](#for-production)
+    - [Helpful commands](#helpful-commands)
+  - [Architecture](#architecture)
+  - [TODOs](#todos)
+  - [CONTRIBUTION](#contribution)
 
 ## Development
 
-### Prerequirements
+### Prerequisites
 
 - Node.js v16.13.1
 - MongoDB v5.0.8
+- Yarn v1.22.15 or higher
 
 ### Configuration
 
-Copy example.dev.env to dev.env and adapt you vaiables if needed
+Copy example.dev.env to dev.env and adapt you variables if needed
 
 - Database (MongoDB)
 
@@ -56,30 +59,13 @@ example (Windows) : `REACT_APP_BACKEND_BASE_URL=http://localhost:${NODE_LOCAL_PO
 
 example (Linux) : `REACT_APP_BACKEND_BASE_URL=http://0.0.0.0:${NODE_LOCAL_PORT}`
 
-- Tools tokens
-
-```env
-ST=${ST_Token}
-IPINFO=${IPINFO_Token}
-SHODAN=${SHODAN_Token}
-ZOOMEEYE=${ZOOMEEYE_Token}
-HUNTER=${HUNTER_Token}
-```
-
-- linkedin credentials
-
-```env
-EMAIL_IN=${email}
-PASS_IN=${pass}
-```
-
 ### Run instructions
 
-- Install node server dependancies
+- Install node server dependencies
 
 ```sh
 cd server
-npm install
+yarn
 ```
 
 - You need to load env variables for the server from dev.env
@@ -98,14 +84,14 @@ source ../dev.env
 - Run node server
 
 ```sh
-npm start
+yarn start
 ```
 
-- Install react client dependancies
+- Install react client dependencies
 
 ```sh
 cd client
-npm install
+yarn
 ```
 
 - You need to load env variables for the client from dev.env
@@ -124,7 +110,7 @@ source ../dev.env
 - Run react client
 
 ```sh
-npm start
+yarn start
 ```
 
 ### Helpful tools for development
@@ -135,45 +121,33 @@ npm start
 
 ## Docker instructions
 
-### For developement node server
+### For development
 
-- Copy example.dev.env to dev.env and adapt you vaiables (See configuraion section)
+- Copy example.dev.env to dev.env and adapt you variables [See configuration section](#configuration)
 
-- To run the server
+- To run docker-compose file
 
 ```sh
 docker-compose -f docker-compose.dev.yml --env-file example.dev.env up -d
 ```
 
-- To connect to it
+### For production
 
-```sh
-docker-compose -f docker-compose.dev.yml --env-file dev.env exec server /bin/bash
-```
+- Copy example.env to .env and adapt you variables [See configuration section](#configuration)
 
-- Start the server
-
-```sh
-cd app
-npm install
-npm start
-```
-
-### For production node server
-
-- Copy example.env to .env and adapt you vaiables (See configuraion section)
-
-- Build image (Go to server directory)
+- Build and Publish server image
 
 ```sh
 cd server
 make build
+make publish
 ```
 
-- Publish image (Go to server directory)
+- Build and Publish client image
 
 ```sh
-cd server
+cd client
+make build
 make publish
 ```
 
@@ -183,60 +157,30 @@ make publish
 docker-compose up -d
 ```
 
-### For developement react client
+### Helpful commands
 
-- Copy example.dev.env to dev.env and adapt you vaiables (See configuraion section)
-
-- To run the client (if you didn't run this command before for the server)
+- To connect to it server's or client's terminal
 
 ```sh
-docker-compose -f docker-compose.dev.yml --env-file example.dev.env up -d
+docker-compose -f docker-compose.dev.yml --env-file dev.env exec [server|client] /bin/bash
 ```
 
-- To connect to it
+- Verify logs file for the server or client
 
 ```sh
-docker-compose -f docker-compose.dev.yml --env-file dev.env exec client /bin/bash
+docker-compose -f docker-compose.dev.yml --env-file dev.env logs [server|client]
 ```
 
-- Start the server
+## Architecture
 
-```sh
-cd app
-npm install
-npm start
-```
-
-### For production react client
-
-- Copy example.env to .env and adapt you vaiables (See configuraion section)
-
-- Build image (Go to client directory)
-
-```sh
-cd client
-make build
-```
-
-- Publish image (Go to client directory)
-
-```sh
-cd client
-make publish
-```
-
-- Test it (if you didn't run this command before for the server)
-
-```sh
-docker-compose up -d
-```
-
-## Architecure
-
-- [Database-architecure](./docs/database_arch.drawio)
-- [General-architecure](./docs/general_arch.drawio)
-- [Detailsed-architecure](./docs/detailsed_arch.drawio)
+- [Database-architecture](./docs/database_arch.drawio)
+- [General-architecture](./docs/general_arch.drawio)
+- [Detailed-architecture](./docs/detailsed_arch.drawio)
 
 ## TODOs
 
 - [TODOs](./docs/TODOs.md)
+
+## CONTRIBUTION
+
+- [CONTRIBUTION](./docs/CONTRIBUTION.md)
