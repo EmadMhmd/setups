@@ -2,14 +2,14 @@ import { Sequelize } from 'sequelize';
 import Env from './env.config';
 
 const {
-  POSTGERS_USER,
-  POSTGERS_PASSWORD,
-  POSTGERS_DATABASE,
+  POSTGRES_USER,
+  POSTGRES_PASSWORD,
+  POSTGRES_DATABASE,
   POSTGRES_HOST,
   POSTGRES_PORT,
 } = Env;
 
-export const db = new Sequelize(`postgres://${POSTGERS_USER}:${POSTGERS_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGERS_DATABASE}`);
+export const db = new Sequelize(`postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DATABASE}`);
 
 const connectToPostgres = async () => {
   try {
