@@ -1,24 +1,72 @@
+/* eslint-disable no-underscore-dangle */
 import { User } from '../../models/mongodb';
-import { IUser } from '../../interface';
+import { UserType } from '../../types';
+import { UserRepo } from '../Repositories';
 
-class UserData {
-  saveUser = async (user : IUser) => {
+class UserData implements UserRepo {
+  // constructor(private readonly x: string) { }
+
+  create = async (user: UserType) => {
     try {
       const newUser = new User(user);
       await newUser.save();
-      return newUser;
+
+      let userDTO: UserType | undefined;
+      if (newUser) {
+        userDTO = {
+          email: user.email,
+          mobile: user.mobile,
+          name: user.name,
+          password: '',
+        };
+      }
+
+      return userDTO;
     } catch {
-      throw new Error('Fail to save the user, Please try again !!');
+      throw new Error('Fail to create the user, Please try again !!');
     }
   };
 
-  getUserById = async (_id: string) => {
+  getById = async (id: string) => {
     try {
-      return User.findOne({ _id });
+      const user = await User.findOne({ id });
+
+      let userDTO: UserType | undefined;
+      if (user) {
+        userDTO = {
+          email: user.email || '',
+          mobile: user.mobile || '',
+          name: user.name || '',
+          password: '',
+        };
+      }
+
+      return userDTO;
+    } catch {
+      throw new Error('Fail to get the user, Please try again !!');
+    }
+  };
+
+  getByEmail = async (email: string) => {
+    try {
+      const user = await User.findOne({ email });
+
+      let userDTO: UserType | undefined;
+      if (user) {
+        userDTO = {
+          id: user._id,
+          email,
+          mobile: user.mobile,
+          name: user.name || '',
+          password: user.password || '',
+        };
+      }
+
+      return userDTO;
     } catch {
       throw new Error('Fail to get the user, Please try again !!');
     }
   };
 }
 
-export default new UserData();
+export default UserData;
