@@ -1,5 +1,5 @@
-import userService from './user.service';
+import User from './user.service';
 
 export {
-  userService,
+  User,
 };

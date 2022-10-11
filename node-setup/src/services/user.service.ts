@@ -1,25 +1,34 @@
-import { IUser } from '../interface';
-import { userData } from '../persistance/postgresDBDataAccess';
-// import { userData } from '../persistance/mongoDBDataAccess';
+import { IUser } from './interfaces';
+import { UserType } from '../types';
+import { UserRepo } from '../persistance/Repositories';
 
-class UserService {
-  saveUser = async (user : IUser) => {
+class User implements IUser {
+  // eslint-disable-next-line no-useless-constructor
+  constructor(private userData: UserRepo) {}
+
+  create = async (user: UserType) => {
     try {
-      const newUser = await userData.saveUser(user);
-      return newUser;
+      return this.userData.create(user);
     } catch {
-      throw new Error('Fail to signup the user, Please try again !!');
+      throw new Error('Fail to login the user, Please try again !!');
     }
   };
 
-  getUserById = async (id: string) => {
+  getById = (id: string) => {
     try {
-      const user = await userData.getUserById(id);
-      return user;
+      return this.userData.getById(id);
     } catch {
-      throw new Error('Fail to get the user Data');
+      throw new Error('Fail to get the user Data, Please try again !!');
+    }
+  };
+
+  getByEmail = (email: string) => {
+    try {
+      return this.userData.getByEmail(email);
+    } catch {
+      throw new Error('Fail to get the user Data, Please try again !!');
     }
   };
 }
 
-export default new UserService();
+export default User;
